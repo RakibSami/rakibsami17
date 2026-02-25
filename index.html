@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> All About Rakib Sami </title>
+
+<link rel="icon" type="image/png" href="favicon.png">
+<script src="script.js" defer></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#0f0f0f;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+color:#fff;
+overflow-x: hidden;
+}
+
+#canvas {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+pointer-events: none;
+}
+
+.container{
+min-height:100%;
+width:480px;
+max-width:95%;
+background:#1a1a1a;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 0 25px rgba(0,0,0,0.6);
+transition:0.3s ease;
+position: relative;
+z-index: 1;
+animation: fadeInUp 1s ease forwards;
+}
+
+@media (min-width: 768px) {
+.container {
+width: 600px;
+}
+}
+
+.banner{
+height:200px;
+background:url('banner.jpg') center/cover no-repeat;
+position:relative;
+transition: background-position 0.1s ease;
+}
+
+.profile{
+width:140px;
+height:140px;
+border-radius:50%;
+border:4px solid #1a1a1a;
+position:absolute;
+bottom:-70px;
+left:50%;
+transform:translateX(-50%);
+background:url('profile.png') center/cover no-repeat;
+box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+animation: pulse 2s infinite ease-in-out;
+}
+
+.content{
+padding-top:80px;
+padding-bottom:25px;
+text-align:center;
+}
+
+h2{
+font-size:28px;
+margin-bottom:5px;
+font-weight: 700;
+letter-spacing: 1px;
+}
+
+.role {
+    font-size:16px;
+    color:#aaa;
+    margin-bottom:20px;
+    max-width:80%;
+    margin-left:auto;
+    margin-right:auto;
+
+    /* Typing Effect */
+    overflow:hidden;
+    white-space:nowrap;
+    border-right:2px solid #aaa;
+    width:0;
+    display:inline-block;
+    animation: typing 5s steps(55,end) forwards,
+               blink 0.7s infinite;
+}
+
+
+@keyframes typing {
+    from { width:0 }
+    to { width:55ch; }
+}
+
+@keyframes blink {
+    50% { border-color:transparent; }
+}
+
+.btn{
+display:flex;
+justify-content:center;
+align-items:center;
+width:90%;
+margin:12px auto;
+padding:16px;
+border-radius:50px;
+text-decoration:none;
+background:#262626;
+color:#fff;
+font-size:18px;
+transition:0.3s ease;
+border:1px solid #333;
+box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+position: relative;
+overflow: hidden;
+}
+
+.btn::before {
+margin-right: 12px;
+font-size: 22px;
+}
+
+
+.content > a:nth-child(3)::before {
+  content: "\f007"; 
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+
+.content > a:nth-child(4)::before {
+  content: "\f167"; 
+  font-family: "Font Awesome 6 Brands";
+  font-weight: 400;
+}
+
+
+.content > a:nth-child(5)::before {
+  content: "\f16d"; 
+  font-family: "Font Awesome 6 Brands";
+  font-weight: 400;
+}
+
+
+.content > a:nth-child(6)::before {
+  content: "\f09a"; 
+  font-family: "Font Awesome 6 Brands";
+  font-weight: 400;
+}
+
+
+.content > a:nth-child(7)::before {
+  content: "\f231"; 
+  font-family: "Font Awesome 6 Brands";
+  font-weight: 400;
+}
+
+
+.content > a:nth-child(8)::before {
+  content: "\e61b"; 
+  font-family: "Font Awesome 6 Brands";
+  font-weight: 400;
+}
+
+
+.content > a:nth-child(9)::before {
+  content: "\f11b";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+.content > a:nth-child(3):hover { background: linear-gradient(45deg, #4caf50, #66bb6a); }
+.content > a:nth-child(4):hover { background: linear-gradient(45deg, #ff0000, #ff5252); }
+.content > a:nth-child(5):hover { background: linear-gradient(45deg, #e4405f, #f48fb1); }
+.content > a:nth-child(6):hover { background: linear-gradient(45deg, #1877f2, #2196f3); }
+.content > a:nth-child(7):hover { background: linear-gradient(45deg, #e60023, #ef5350); }
+.content > a:nth-child(8):hover { background: linear-gradient(45deg, #000000, #434343); color: #1da1f2; }
+.content > a:nth-child(9):hover { background: linear-gradient(45deg, #00a2ff, #4fc3f7); }
+
+.mail{
+margin-top:15px;
+font-size:18px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+color:#ccc;
+transition: 0.3s ease;
+}
+
+.mail:hover {
+color: #fff;
+}
+
+.mail a{
+color:#ccc;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s ease;
+}
+
+.mail a:hover{
+color:#fff;
+}
+
+footer{
+background:#111;
+text-align:center;
+padding:12px;
+font-size:12px;
+color:#777;
+}
+
+/* Modal */
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,0.85);
+animation: fadeIn 0.3s ease forwards;
+z-index: 10;
+}
+
+.modal-content{
+width:400px;
+max-width:90%;
+background:#1c1c1c;
+padding:25px;
+border-radius:10px;
+border:1px solid #333;
+transform: translateY(-50px);
+opacity:0;
+animation: slideIn 0.4s forwards;
+box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+@media (min-width: 768px) {
+.modal-content {
+width: 500px;
+}
+}
+
+.modal-content h3{
+margin-top:10px;
+margin-bottom:5px;
+font-size:18px;
+color:#ddd;
+}
+
+.modal-content p{
+font-size:15px;
+color:#aaa;
+line-height:1.6;
+}
+
+.close{
+float:right;
+cursor:pointer;
+color:#888;
+font-size:20px;
+transition: 0.3s ease;
+}
+
+.close:hover{
+color:#fff;
+transform: rotate(90deg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+from {opacity:0;}
+to {opacity:1;}
+}
+
+@keyframes slideIn {
+from {transform: translateY(-50px); opacity:0;}
+to {transform: translateY(0); opacity:1;}
+}
+
+@keyframes pulse {
+0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<audio id="hoverSound" src="mic.mp3" preload="auto"></audio>
+
+<div class="container">
+
+<div class="banner">
+<div class="profile"></div>
+</div>
+
+<div class="content">
+
+<h2>Rakib Sami</h2>
+<div class="role">Future goal? Maybe become a game developer someday</div>
+
+<a href="#" class="btn" onclick="openModal()">About Me</a>
+<a href="https://youtube.com/theultimategamers9" target="_blank" class="btn">YouTube</a>
+<a href="https://instagram.com/rakibsami17" target="_blank" class="btn">Instagram</a>
+<a href="https://www.facebook.com/rsgaming.9266" target="_blank" class="btn">Facebook</a>
+<a href="https://pinterest.com/rakibsami17" target="_blank" class="btn">Pinterest</a>
+<a href="https://x.com/RakibSami1" target="_blank" class="btn">X</a>
+<a href="https://www.roblox.com/users/5347436254/profile" target="_blank" class="btn">Roblox</a>
+
+<div class="mail">
+<i class="fa-solid fa-envelope"></i>
+<a href="mailto:rakibsami17@gmail.com?subject=Hello&body=Hi Rakib!">Mail Me</a>
+</div>
+
+</div>
+
+<footer>
+© 2026 Rakib Sami | All Rights Reserved
+</footer>
+
+</div>
+
+<!-- Modal -->
+
+<div class="modal" id="aboutModal">
+<div class="modal-content">
+<span class="close" onclick="closeModal()">✖</span>
+
+<h3>About Me</h3>
+<p>Just a CSE student who really enjoys sitting with code and making things work. I spend most of my time gaming, tinkering with small projects, or thinking up random story ideas. Building clean web stuff with HTML, CSS, and JavaScript feels satisfying, and I’m slowly getting better at C/C++ too.</p>
+
+<h3>Education</h3>
+<p>SSC & HSC – both GPA 5.00<br>
+Currently pursuing Computer Science & Engineering.</p>
+
+<h3>Interests & Skills</h3>
+<p>Programming (HTML, CSS, JavaScript, Bootstrap, C/C++ in progress)<br>
+Gaming, making up stories, UI design & simple animations<br>
+Photography – mostly space, nature, landscapes (I upload some on Facebook when I get nice shots)<br>
+3D animation and illustration seem really cool, but studies come first for now.</p>
+
+<p>Nothing fancy — just trying to learn, build, and enjoy the process. Future goal? Maybe become a game developer someday.</p>
+
+</div>
+</div>
+
+<script>
+function openModal(){
+  const modal = document.getElementById("aboutModal");
+  modal.style.display="flex";
+}
+function closeModal(){
+  const modal = document.getElementById("aboutModal");
+  modal.style.display="none";
+}
+
+// Add hover sound
+const hoverSound = document.getElementById('hoverSound');
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('mouseenter', () => {
+    hoverSound.currentTime = 0;
+    hoverSound.play().catch(() => {});
+  });
+});
+
+// Parallax effect on banner
+const banner = document.querySelector('.banner');
+document.addEventListener('mousemove', (e) => {
+  const { clientX, clientY } = e;
+  const x = ((clientX / window.innerWidth) * 20) - 10;
+  const y = ((clientY / window.innerHeight) * 20) - 10;
+  banner.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
+});
+
+// Star particles for space/gaming theme
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+let stars = [];
+for (let i = 0; i < 300; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 1.5 + 0.5,
+    alpha: Math.random(),
+    speed: Math.random() * 0.005 + 0.001
+  });
+}
+
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let star of stars) {
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+    ctx.fill();
+
+    star.alpha += star.speed * (Math.random() > 0.5 ? 1 : -1);
+    if (star.alpha > 1) star.alpha = 1;
+    if (star.alpha < 0.2) star.alpha = 0.2;
+  }
+  requestAnimationFrame(drawStars);
+}
+
+drawStars();
+</script>
+
+</body>
+</html>
