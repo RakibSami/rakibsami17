@@ -3,398 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> All About Rakib Sami </title>
-
+<title>Rakib Sami | Cosmic Coder & Gamer</title>
 <link rel="icon" type="image/png" href="favicon.png">
-<script src="script.js" defer></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins', Arial, Helvetica, sans-serif;
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+body { background:#0a0a0a; min-height:100vh; color:#e0f7ff; display:flex; justify-content:center; align-items:center; overflow-x:hidden; position:relative; }
+#canvas { position:fixed; inset:0; z-index:-1; pointer-events:none; }
+.container { width:460px; max-width:95%; background:rgba(20,20,30,0.92); border-radius:20px; overflow:hidden; box-shadow:0 0 35px rgba(0,255,255,0.25),0 0 50px rgba(255,0,255,0.15); position:relative; z-index:2; animation:fadeInUp 1.2s ease; }
+@media (min-width:768px) { .container { width:560px; } }
+.banner { height:180px; background:url('banner.jpg') center/cover no-repeat; position:relative; transition:background-position 0.15s ease; }
+.banner::before { content:''; position:absolute; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(10,10,20,0.85) 70%); }
+.profile { width:130px; height:130px; border-radius:50%; border:5px solid #0f0f1f; position:absolute; bottom:-55px; left:50%; transform:translateX(-50%); background:url('profile.png') center/cover no-repeat; box-shadow:0 0 25px rgba(0,255,255,0.6); animation:pulseGlow 3s infinite ease-in-out; }
+@keyframes pulseGlow { 0%,100% { box-shadow:0 0 15px rgba(0,255,255,0.4); } 50% { box-shadow:0 0 35px rgba(0,255,255,0.8); } }
+.content { padding:80px 20px 25px; text-align:center; }
+h2 { font-family:'Orbitron',sans-serif; font-size:2.3rem; color:#00ffff; text-shadow:0 0 12px #00ffff,0 0 20px #ff00ff; margin-bottom:6px; letter-spacing:2px; }
+.role { font-size:1.1rem; color:#a0f0ff; margin-bottom:20px; overflow:hidden; white-space:nowrap; border-right:3px solid #00ffff; width:0; display:inline-block; animation:typing 2.2s steps(22) forwards, blink 0.8s infinite; }
+@keyframes typing { to { width:22ch; } }
+@keyframes blink { 50% { border-color:transparent; } }
+.btn-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; padding:0 10px; justify-items:center; }
+.btn { background:#1a1a2e; border:2px solid #333366; border-radius:50px; padding:14px 12px; color:#e0f7ff; text-decoration:none; font-size:0.98rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:10px; transition:all 0.3s ease; box-shadow:0 4px 12px rgba(0,0,0,0.4); min-width:140px; max-width:220px; }
+.btn:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,255,255,0.3); border-color:#00ffff; }
+.btn i { font-size:1.3rem; }
+.btn.youtube:hover { background:linear-gradient(45deg,#ff0000,#ff4d4d); }
+.btn.instagram:hover { background:linear-gradient(45deg,#e1306c,#fd1d1d); }
+.btn.facebook:hover { background:linear-gradient(45deg,#1877f2,#00aaff); }
+.btn.pinterest:hover { background:linear-gradient(45deg,#e60023,#ff4d4d); }
+.btn.x:hover { background:linear-gradient(45deg,#000,#333); color:#1da1f2; }
+.btn.roblox:hover { background:linear-gradient(45deg,#00bfff,#1e90ff); }
+.btn.about:hover { background:linear-gradient(45deg,#00ff99,#00ccff); }
+
+.btn.tiktok:hover { 
+  background:linear-gradient(45deg, #fe2c55, #25f4ee); 
+  border-color: #25f4ee; 
+  box-shadow:0 8px 20px rgba(37,244,238,0.5); 
 }
+.btn.roblox { grid-column: 1 / -1; justify-self:center; width:180px; }
+.mail { margin:20px auto; font-size:1.05rem; display:flex; justify-content:center; align-items:center; gap:10px; color:#a0f0ff; }
+.mail a { color:#00ffff; text-decoration:none; font-weight:bold; }
+.mail:hover { color:#fff; text-shadow:0 0 8px #00ffff; }
+footer { background:#0a0a0a; padding:10px; font-size:0.8rem; color:#666; text-align:center; border-top:1px solid #222; }
+.modal { position:fixed; inset:0; background:rgba(0,0,0,0.9); display:none; justify-content:center; align-items:center; z-index:100; backdrop-filter:blur(8px); }
+.modal-content { background:#111122; border:3px solid #00ffff; border-radius:18px; max-width:90%; width:460px; padding:25px; color:#e0f7ff; position:relative; animation:slideIn 0.4s ease; text-align:center; }
+.close { position:absolute; top:12px; right:18px; font-size:2rem; color:#00ffff; cursor:pointer; transition: transform 0.3s ease, color 0.3s ease; }
+.close:hover { color:#ff00ff; transform:rotate(90deg); }
+.modal-content img { max-width:100%; height:auto; border-radius:12px; margin:15px 0; box-shadow:0 0 20px rgba(37,244,238,0.4); }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideIn { from { transform:scale(0.8); opacity:0; } to { transform:scale(1); opacity:1; } }
 
-body{
-background:#0f0f0f;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-color:#fff;
-overflow-x: hidden;
-}
-
-#canvas {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: -1;
-pointer-events: none;
-}
-
-.container{
-min-height:100%;
-width:480px;
-max-width:95%;
-background:#1a1a1a;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 0 25px rgba(0,0,0,0.6);
-transition:0.3s ease;
-position: relative;
-z-index: 1;
-animation: fadeInUp 1s ease forwards;
-}
-
-@media (min-width: 768px) {
-.container {
-width: 600px;
-}
-}
-
-.banner{
-height:200px;
-background:url('banner.jpg') center/cover no-repeat;
-position:relative;
-transition: background-position 0.1s ease;
-}
-
-.profile{
-width:140px;
-height:140px;
-border-radius:50%;
-border:4px solid #1a1a1a;
-position:absolute;
-bottom:-70px;
-left:50%;
-transform:translateX(-50%);
-background:url('profile.png') center/cover no-repeat;
-box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-animation: pulse 2s infinite ease-in-out;
-}
-
-.content{
-padding-top:80px;
-padding-bottom:25px;
-text-align:center;
-}
-
-h2{
-font-size:28px;
-margin-bottom:5px;
-font-weight: 700;
-letter-spacing: 1px;
-}
-
-.role {
-    font-size:16px;
-    color:#aaa;
-    margin-bottom:20px;
-    max-width:80%;
-    margin-left:auto;
-    margin-right:auto;
-
-    /* Typing Effect */
-    overflow:hidden;
-    white-space:nowrap;
-    border-right:2px solid #aaa;
-    width:0;
-    display:inline-block;
-    animation: typing 1s steps(13,end) forwards,
-               blink 0.7s infinite;
-}
-
-/* Typing Animation */
-@keyframes typing {
-    from { width: 0; }
-    to { width: 13ch; }
-}
-
-/* Cursor Blink */
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-
-.btn{
-display:flex;
-justify-content:center;
-align-items:center;
-width:90%;
-margin:12px auto;
-padding:16px;
-border-radius:50px;
-text-decoration:none;
-background:#262626;
-color:#fff;
-font-size:18px;
-transition:0.3s ease;
-border:1px solid #333;
-box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-position: relative;
-overflow: hidden;
-}
-
-.btn::before {
-margin-right: 12px;
-font-size: 22px;
-}
-
-
-.content > a:nth-child(3)::before {
-  content: "\f007"; 
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-}
-
-
-.content > a:nth-child(4)::before {
-  content: "\f167"; 
-  font-family: "Font Awesome 6 Brands";
-  font-weight: 400;
-}
-
-
-.content > a:nth-child(5)::before {
-  content: "\f16d"; 
-  font-family: "Font Awesome 6 Brands";
-  font-weight: 400;
-}
-
-
-.content > a:nth-child(6)::before {
-  content: "\f09a"; 
-  font-family: "Font Awesome 6 Brands";
-  font-weight: 400;
-}
-
-
-.content > a:nth-child(7)::before {
-  content: "\f231"; 
-  font-family: "Font Awesome 6 Brands";
-  font-weight: 400;
-}
-
-
-.content > a:nth-child(8)::before {
-  content: "\e61b"; 
-  font-family: "Font Awesome 6 Brands";
-  font-weight: 400;
-}
-
-
-.content > a:nth-child(9)::before {
-  content: "\f11b";
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-}
-
-.btn:hover{
-transform:translateY(-3px);
-box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-}
-
-.content > a:nth-child(3):hover { background: linear-gradient(45deg, #4caf50, #66bb6a); }
-.content > a:nth-child(4):hover { background: linear-gradient(45deg, #ff0000, #ff5252); }
-.content > a:nth-child(5):hover { background: linear-gradient(45deg, #e4405f, #f48fb1); }
-.content > a:nth-child(6):hover { background: linear-gradient(45deg, #1877f2, #2196f3); }
-.content > a:nth-child(7):hover { background: linear-gradient(45deg, #e60023, #ef5350); }
-.content > a:nth-child(8):hover { background: linear-gradient(45deg, #000000, #434343); color: #1da1f2; }
-.content > a:nth-child(9):hover { background: linear-gradient(45deg, #00a2ff, #4fc3f7); }
-
-.mail{
-margin-top:15px;
-font-size:18px;
-display:flex;
-justify-content:center;
-align-items:center;
-gap:10px;
-color:#ccc;
-transition: 0.3s ease;
-}
-
-.mail:hover {
-color: #fff;
-}
-
-.mail a{
-color:#ccc;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s ease;
-}
-
-.mail a:hover{
-color:#fff;
-}
-
-footer{
-background:#111;
-text-align:center;
-padding:12px;
-font-size:12px;
-color:#777;
-}
-
-/* Modal */
-.modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:none;
-justify-content:center;
-align-items:center;
-background:rgba(0,0,0,0.85);
-animation: fadeIn 0.3s ease forwards;
-z-index: 10;
-}
-
-.modal-content{
-width:400px;
-max-width:90%;
-background:#1c1c1c;
-padding:25px;
-border-radius:10px;
-border:1px solid #333;
-transform: translateY(-50px);
-opacity:0;
-animation: slideIn 0.4s forwards;
-box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-@media (min-width: 768px) {
-.modal-content {
-width: 500px;
-}
-}
-
-.modal-content h3{
-margin-top:10px;
-margin-bottom:5px;
-font-size:18px;
-color:#ddd;
-}
-
-.modal-content p{
-font-size:15px;
-color:#aaa;
-line-height:1.6;
-}
-
-.close{
-float:right;
-cursor:pointer;
-color:#888;
-font-size:20px;
-transition: 0.3s ease;
-}
-
-.close:hover{
-color:#fff;
-transform: rotate(90deg);
-}
-
-/* Animations */
-@keyframes fadeIn {
-from {opacity:0;}
-to {opacity:1;}
-}
-
-@keyframes slideIn {
-from {transform: translateY(-50px); opacity:0;}
-to {transform: translateY(0); opacity:1;}
-}
-
-@keyframes pulse {
-0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
-70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
-100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
-}
-
-@keyframes fadeInUp {
-from { opacity: 0; transform: translateY(20px); }
-to { opacity: 1; transform: translateY(0); }
+/* Mobile fixes */
+@media (max-width: 480px) {
+  .container { border-radius: 15px; }
+  .banner { height: 150px; }
+  .profile { width: 110px; height: 110px; bottom: -50px; border-width: 4px; box-shadow: 0 0 20px rgba(0,255,255,0.5); }
+  .content { padding: 70px 15px 20px; }
+  h2 { font-size: 1.8rem; letter-spacing: 1px; text-shadow: 0 0 8px #00ffff, 0 0 15px #ff00ff; }
+  .role { font-size: 1rem; animation: typing 2s steps(22) forwards, blink 0.8s infinite; }
+  .btn-grid { grid-template-columns: 1fr; gap: 12px; padding: 0 5px; }
+  .btn { padding: 12px 18px; font-size: 0.95rem; min-width: 140px; max-width: 260px; margin: 0 auto; gap: 10px; }
+  .btn i { font-size: 1.2rem; }
+  .btn.roblox { width: 200px; }
+  .mail { font-size: 1rem; margin: 15px auto; }
+  footer { font-size: 0.75rem; padding: 8px; }
+  .modal-content { width: 90%; padding: 20px; }
 }
 </style>
 </head>
 <body>
 <canvas id="canvas"></canvas>
+<div class="container">
+  <div class="banner">
+    <div class="profile"></div>
+  </div>
+  <div class="content">
+    <h2>Rakib Sami</h2>
+    <div class="role">Cosmic Coder & Gamer</div>
+    <div class="btn-grid">
+      <a href="#" class="btn about" onclick="openModal()"><i class="fas fa-user-astronaut"></i> About Me</a>
+      <a href="https://youtube.com/theultimategamers9" target="_blank" class="btn youtube"><i class="fab fa-youtube"></i> YouTube</a>
+      <a href="https://instagram.com/rakibsami17" target="_blank" class="btn instagram"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.facebook.com/rsgaming.9266" target="_blank" class="btn facebook"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="https://pinterest.com/rakibsami17" target="_blank" class="btn pinterest"><i class="fab fa-pinterest"></i> Pinterest</a>
+      <a href="#" class="btn tiktok" onclick="openTikTokModal()"><i class="fab fa-tiktok"></i> TikTok</a>
+      <a href="https://www.roblox.com/users/5347436254/profile" target="_blank" class="btn roblox"><i class="fab fa-roblox"></i> Roblox</a>
+    </div>
+    <div class="mail">
+      <i class="fas fa-envelope"></i>
+      <a href="mailto:rakibsami17@gmail.com?subject=Yo%20Rakib!">Mail Me</a>
+    </div>
+  </div>
+  <footer>
+    © 2026 Rakib Sami | All Rights Reserved
+  </footer>
+</div>
+
+<!-- About Me Modal -->
+<div class="modal" id="aboutModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">×</span>
+    <h3 style="color:#00ffff; margin-bottom:12px;">About Me</h3>
+    <p>Just a CSE student who lives for code, games, stories, and late-night vibes. Building cool web stuff, grinding C/C++, snapping space pics, and dreaming big about game dev.</p>
+    <p>Education:• Currently in CSE</p>
+    <p>Let's link up if you're into gaming or coding chaos!</p>
+  </div>
+</div>
+
+<!-- TikTok Modal -->
+<div class="modal" id="tiktokModal">
+  <div class="modal-content" >
+    <span class="close" onclick="closeTikTokModal()">×</span>
+    <h3 style="color:#fe2c55; margin-bottom:12px;">TikTok Vibes</h3>
+   
+    <img src="cat-say-bleh.gif" alt="TikTok Fun GIF">
+    <p style="margin-top:15px;">TikTok? Ahhh… cringe 😒 🔥<br>
+I’m a good boy. My advice? Delete your TikTok. XD</p>
+    
+</div>
+
 <audio id="hoverSound" src="mic.mp3" preload="auto"></audio>
 
-<div class="container">
-
-<div class="banner">
-<div class="profile"></div>
-</div>
-
-<div class="content">
-
-<h2>Rakib Sami</h2>
-<div class="role"> Maybe Oneday </div>
-
-<a href="#" class="btn" onclick="openModal()">About Me</a>
-<a href="https://youtube.com/theultimategamers9" target="_blank" class="btn">YouTube</a>
-<a href="https://instagram.com/rakibsami17" target="_blank" class="btn">Instagram</a>
-<a href="https://www.facebook.com/rsgaming.9266" target="_blank" class="btn">Facebook</a>
-<a href="https://pinterest.com/rakibsami17" target="_blank" class="btn">Pinterest</a>
-<a href="https://x.com/RakibSami1" target="_blank" class="btn">X</a>
-<a href="https://www.roblox.com/users/5347436254/profile" target="_blank" class="btn">Roblox</a>
-
-<div class="mail">
-<i class="fa-solid fa-envelope"></i>
-<a href="mailto:rakibsami17@gmail.com?subject=Hello&body=Hi Rakib!">Mail Me</a>
-</div>
-
-</div>
-
-<footer>
-© 2026 Rakib Sami | All Rights Reserved
-</footer>
-
-</div>
-
-<!-- Modal -->
-
-<div class="modal" id="aboutModal">
-<div class="modal-content">
-<span class="close" onclick="closeModal()">✖</span>
-
-<h3>About Me</h3>
-<p>Just a CSE student who really enjoys sitting with code and making things work. I spend most of my time gaming, tinkering with small projects, or thinking up random story ideas. Building clean web stuff with HTML, CSS, and JavaScript feels satisfying, and I’m slowly getting better at C/C++ too.</p>
-
-<h3>Education</h3>
-<p>SSC & HSC – both GPA 5.00<br>
-Currently pursuing Computer Science & Engineering.</p>
-
-<h3>Interests & Skills</h3>
-<p>Programming (HTML, CSS, JavaScript, Bootstrap, C/C++ in progress)<br>
-Gaming, making up stories, UI design & simple animations<br>
-Photography – mostly space, nature, landscapes (I upload some on Facebook when I get nice shots)<br>
-3D animation and illustration seem really cool, but studies come first for now.</p>
-
-<p>Nothing fancy — just trying to learn, build, and enjoy the process. Future goal? Maybe become a game developer someday.</p>
-
-</div>
-</div>
-
 <script>
-function openModal(){
-  const modal = document.getElementById("aboutModal");
-  modal.style.display="flex";
+function openModal() { 
+  document.getElementById("aboutModal").style.display = "flex"; 
 }
-function closeModal(){
-  const modal = document.getElementById("aboutModal");
-  modal.style.display="none";
+function closeModal() { 
+  document.getElementById("aboutModal").style.display = "none"; 
 }
 
-// Add hover sound
+function openTikTokModal() { 
+  document.getElementById("tiktokModal").style.display = "flex"; 
+}
+function closeTikTokModal() { 
+  document.getElementById("tiktokModal").style.display = "none"; 
+}
+
 const hoverSound = document.getElementById('hoverSound');
 document.querySelectorAll('.btn').forEach(btn => {
   btn.addEventListener('mouseenter', () => {
@@ -403,55 +146,79 @@ document.querySelectorAll('.btn').forEach(btn => {
   });
 });
 
-// Parallax effect on banner
 const banner = document.querySelector('.banner');
-document.addEventListener('mousemove', (e) => {
-  const { clientX, clientY } = e;
-  const x = ((clientX / window.innerWidth) * 20) - 10;
-  const y = ((clientY / window.innerHeight) * 20) - 10;
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth * 25) - 12.5;
+  const y = (e.clientY / window.innerHeight * 25) - 12.5;
   banner.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
 });
-
-// Star particles for space/gaming theme
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
 let stars = [];
-for (let i = 0; i < 300; i++) {
+for(let i=0; i<350; i++){
   stars.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 1.5 + 0.5,
-    alpha: Math.random(),
-    speed: Math.random() * 0.005 + 0.001
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    r: Math.random()*1.4 + 0.4,
+    phase: Math.random() * Math.PI * 2,
+    speed: Math.random() * 0.001 + 0.0005
   });
 }
-
-function drawStars() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let star of stars) {
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-    ctx.fill();
-
-    star.alpha += star.speed * (Math.random() > 0.5 ? 1 : -1);
-    if (star.alpha > 1) star.alpha = 1;
-    if (star.alpha < 0.2) star.alpha = 0.2;
-  }
-  requestAnimationFrame(drawStars);
+let shootingStars = [];
+function createShootingStar() {
+  const startX = Math.random() * canvas.width;
+  const angle = Math.PI / 4 + (Math.random() - 0.5) * 0.7;
+  shootingStars.push({
+    x: startX,
+    y: Math.random() * (canvas.height * 0.35),
+    length: Math.random() * 100 + 50,
+    speed: Math.random() * 10 + 7,
+    angle: angle,
+    hue: Math.random() * 60 + 180,
+    alpha: 1
+  });
 }
-
-drawStars();
+setInterval(() => {
+  if (Math.random() > 0.4) createShootingStar();
+}, 1200);
+function draw() {
+  ctx.fillStyle = 'rgba(10,10,10,0.2)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  const now = Date.now();
+  stars.forEach(s => {
+    const alpha = 0.3 + 0.7 * ((Math.sin(now * s.speed + s.phase) + 1) / 2);
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+    ctx.fill();
+  });
+  for(let i=shootingStars.length-1; i>=0; i--){
+    let s = shootingStars[i];
+    const gradient = ctx.createLinearGradient(
+      s.x, s.y,
+      s.x - s.length * Math.cos(s.angle),
+      s.y - s.length * Math.sin(s.angle)
+    );
+    gradient.addColorStop(0, `hsla(${s.hue}, 100%, 80%, ${s.alpha})`);
+    gradient.addColorStop(1, `hsla(${s.hue}, 100%, 50%, 0)`);
+    ctx.beginPath();
+    ctx.moveTo(s.x, s.y);
+    ctx.lineTo(s.x - s.length * Math.cos(s.angle), s.y - s.length * Math.sin(s.angle));
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = 3.5;
+    ctx.stroke();
+    s.x += s.speed * Math.cos(s.angle);
+    s.y += s.speed * Math.sin(s.angle);
+    s.alpha -= 0.018;
+    if(s.alpha <= 0 || s.x < -150 || s.y < -150 || s.x > canvas.width + 150 || s.y > canvas.height + 150){
+      shootingStars.splice(i,1);
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
 </script>
-
 </body>
 </html>
