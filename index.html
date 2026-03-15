@@ -7,6 +7,10 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Comfortaa:wght@400;600&display=swap" rel="stylesheet">
+  
+
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.3/dist/dotlottie-wc.js" type="module"></script>
+  
   <style>
     * {
       margin: 0;
@@ -26,7 +30,6 @@
       overflow-x: hidden;
     }
 
-
     body.light-theme {
       background: linear-gradient(145deg, #faf0e6 0%, #ffe9df 100%);
     }
@@ -36,9 +39,7 @@
     body.light-theme .container { background: rgba(255, 255, 255, 0.75); }
     body.light-theme .btn { background: white; color: #4a3f38; }
     body.light-theme .btn i { color: #b15e3a; }
-    body.light-theme .mail-section { background: rgba(255, 255, 255, 0.5); }
     body.light-theme footer { background: rgba(250, 240, 230, 0.4); color: #b7a48e; }
-
 
     body.dark-theme {
       background: linear-gradient(145deg, #0a0f1a 0%, #1a0f1a 100%);
@@ -51,11 +52,18 @@
     body.dark-theme .role { background: rgba(40, 30, 40, 0.8); color: #ffc8a2; border-color: #ff7e5f; }
     body.dark-theme .btn { background: #1a1e2a; color: #e0d9cc; border-color: #5a3e5a; }
     body.dark-theme .btn i { color: #ffb89a; }
-    body.dark-theme .mail-section { background: rgba(30, 25, 35, 0.8); }
-    body.dark-theme .mail-section a { color: #ffd9b0; }
-    body.dark-theme .mail-section i { color: #ffb89a; }
     body.dark-theme footer { background: rgba(10, 5, 15, 0.8); color: #9a8e9a; }
-
+    
+    body.dark-theme .modal-content p,
+    body.dark-theme .modal-content h3,
+    body.dark-theme .modal-content .about-highlight {
+      color: #ffd9b0;
+    }
+    
+    body.dark-theme .about-highlight {
+      background: rgba(255, 126, 95, 0.2);
+      border-top-color: #ff7e5f;
+    }
 
     .shape {
       position: fixed;
@@ -85,7 +93,6 @@
       100% { transform: translate(50px, 40px) scale(1.2); }
     }
 
-
     .particle {
       position: fixed;
       width: 4px;
@@ -105,7 +112,6 @@
       0% { transform: translateY(-100px) rotate(0deg); opacity: 0.6; }
       100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
-
 
     .theme-toggle {
       position: fixed;
@@ -130,7 +136,6 @@
       transform: scale(1.1);
     }
 
-
     .container {
       width: 500px;
       max-width: 100%;
@@ -143,7 +148,6 @@
       overflow: hidden;
     }
 
-
     .banner {
       height: 170px;
       background-image: url('banner.jpg');
@@ -154,7 +158,6 @@
       border-radius: 48px 48px 0 0;
     }
 
-   
     .profile {
       width: 140px;
       height: 140px;
@@ -176,16 +179,15 @@
       text-align: center;
     }
 
-   
     h2 {
       font-family: 'Comfortaa', cursive;
       font-size: 2.4rem;
       font-weight: 600;
       color: #5e4b3a;
       margin-bottom: 6px;
+      margin-top: -10px;
     }
 
-    /* role badge */
     .role {
       font-size: 1.1rem;
       background: linear-gradient(135deg, #ffb89a, #ff9f8a);
@@ -204,7 +206,6 @@
       100% { transform: translateY(-4px); }
     }
 
-    /* button grid */
     .btn-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -234,7 +235,6 @@
       transition: all 0.3s ease;
     }
 
-    /* hover effect  */
     .btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 20px -8px rgba(255, 120, 80, 0.4);
@@ -244,7 +244,6 @@
       transform: scale(1.3);
     }
 
- 
     .btn.youtube:hover i { color: #ff0000; }
     .btn.instagram:hover i { color: #e1306c; }
     .btn.facebook:hover i { color: #1877f2; }
@@ -260,34 +259,73 @@
       width: 100%;
     }
 
-    /* mail section */
-    .mail-section {
-      margin: 30px auto 10px;
+   
+    .mail-button-wrapper {
+      margin: 35px auto 15px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .mail-button {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 15px;
-      padding: 14px 25px;
-      border-radius: 70px;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 200, 170, 0.5);
-      width: fit-content;
-      transition: transform 0.2s ease;
-    }
-
-    .mail-section:hover {
-      transform: scale(1.02);
-    }
-
-    .mail-section i {
-      font-size: 1.3rem;
-      color: #b15e3a;
-    }
-
-    .mail-section a {
-      color: #5e4b3a;
+      gap: 12px;
+      padding: 16px 35px;
+      border-radius: 60px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 1.2rem;
+      background: linear-gradient(145deg, #ff6b6b, #ff8a7a);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 25px -5px rgba(255, 107, 107, 0.5);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mail-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #ff8a7a, #ff6b6b);
+      transition: left 0.3s ease;
+      z-index: 0;
+    }
+
+    .mail-button:hover::before {
+      left: 0;
+    }
+
+    .mail-button i, 
+    .mail-button span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mail-button:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 20px 30px -8px #ff4757;
+    }
+
+    .mail-button i {
+      font-size: 1.5rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    body.dark-theme .mail-button {
+      background: linear-gradient(145deg, #4a2a4a, #2a1a3a);
+      box-shadow: 0 10px 25px -5px rgba(200, 150, 255, 0.3);
     }
 
     footer {
@@ -297,7 +335,6 @@
       border-top: 1px solid rgba(255, 200, 170, 0.3);
     }
 
-    /* modal styles */
     .modal {
       position: fixed;
       inset: 0;
@@ -349,53 +386,112 @@
       transform: scale(1.2);
     }
 
-    .modal-gif {
-      max-width: 150px;
-      border-radius: 30px;
-      margin: 15px auto;
+   
+    .lottie-container {
+      width: 250px;
+      height: 250px;
+      margin: 0 auto 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* mobile */
+    dotlottie-wc {
+      width: 100%;
+      height: 100%;
+    }
+
+    .about-highlight {
+      font-size: 1.2rem;
+      background: #ffe8e0;
+      padding: 12px;
+      border-radius: 30px;
+      margin-top: 15px;
+      border-top: 2px dashed #ffb89a;
+    }
+
+    body.dark-theme .about-highlight {
+      background: rgba(255, 126, 95, 0.15);
+    }
+
+   
+    .animation-selector {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 15px 0;
+      flex-wrap: nowrap;
+    }
+
+    .selector-btn {
+      padding: 8px 18px;
+      border-radius: 25px;
+      border: none;
+      background: #ff8a7a;
+      color: white;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 2px solid transparent;
+    }
+
+    .selector-btn:hover {
+      background: #ff6b6b;
+      transform: scale(1.05);
+    }
+
+    .selector-btn i {
+      font-size: 1rem;
+    }
+
+    body.dark-theme .selector-btn {
+      background: #4a2a4a;
+      color: #ffd9b0;
+    }
+
+    .selector-btn.active {
+      background: #ff4757;
+      border-color: white;
+      box-shadow: 0 0 15px #ff4757;
+    }
+
     @media (max-width: 480px) {
       .container { border-radius: 36px; }
       .banner { height: 150px; }
       .profile { width: 120px; height: 120px; bottom: -45px; }
       h2 { font-size: 2rem; }
       .btn { padding: 14px 8px; }
+      .lottie-container { width: 200px; height: 200px; }
     }
   </style>
 </head>
 <body class="light-theme">
 
-
   <div class="theme-toggle" onclick="toggleTheme()">
     <i class="fas fa-moon"></i>
   </div>
-
 
   <div class="shape shape1"></div>
   <div class="shape shape2"></div>
 
   <div class="container">
-
     <div class="banner">
-
       <div class="profile"></div>
     </div>
     
     <div class="content">
-
       <h2>Rakib Sami</h2>
       
-  
       <div class="role">
         <i class="fas fa-heart" style="color: #ff6b6b;"></i>&nbsp;&nbsp;for&nbsp;( ; ; )&nbsp;love_her&nbsp;( )&nbsp;;&nbsp;&nbsp;<i class="fas fa-code"></i>
       </div>
 
-   
       <div class="btn-grid">
         <a href="#" class="btn about" onclick="openModal('about')"><i class="fas fa-smile"></i> About Me</a>
-        <a href="https://youtube.com/theultimategamers9" target="_blank" class="btn youtube"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="https://www.youtube.com/@theultimategamers9?sub_confirmation=1" target="_blank" class="btn youtube"><i class="fab fa-youtube"></i> YouTube</a>
         <a href="https://instagram.com/rakibsami17" target="_blank" class="btn instagram"><i class="fab fa-instagram"></i> Instagram</a>
         <a href="https://www.facebook.com/rsgaming.9266" target="_blank" class="btn facebook"><i class="fab fa-facebook"></i> Facebook</a>
         <a href="https://pinterest.com/rakibsami17" target="_blank" class="btn pinterest"><i class="fab fa-pinterest"></i> Pinterest</a>
@@ -403,10 +499,13 @@
         <a href="https://www.roblox.com/users/5347436254/profile" target="_blank" class="btn roblox"><i class="fab fa-roblox"></i> Roblox</a>
       </div>
 
-  
-      <div class="mail-section">
-        <i class="fas fa-envelope"></i>
-        <a href="mailto:rakibsami17@gmail.com">rakibsami17@gmail.com</a>
+
+      <div class="mail-button-wrapper">
+        <a href="mailto:rakibsami17@gmail.com?subject=Hello%20Sami&body=Hello%20Sami%2C%20How%20are%20you%20!" class="mail-button">
+          <i class="fas fa-paper-plane"></i>
+          <span>Mail Me</span>
+          <i class="fas fa-envelope"></i>
+        </a>
       </div>
     </div>
 
@@ -417,40 +516,87 @@
 
 
   <div class="modal" id="aboutModal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('about')">&times;</span>
-    <h3><i class="fas fa-gamepad"></i> GAMER · Web Developer</h3>
-    <img class="modal-gif" src="https://media.giphy.com/media/l4FGI8RilN6ZINi2A/giphy.gif" alt="gaming cat">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('about')">&times;</span>
+      <h3><i class="fas fa-gamepad"></i> GAMER · Web Developer</h3>
     
-    <p style="font-size: 1.2rem; font-weight: bold; color: #ff8a7a;">🎮 MINECRAFT CREATIVE BUILDER 🎮</p>
+      <div class="lottie-container" id="lottieContainer">
     
-    <p>I'm a passionate gamer and awesome Minecraft creative builder. I run my own YouTube channel <strong>"Ultimate Gamers 9"</strong> where I share gaming content and creative builds.</p>
-    
-    <p style="margin-top: 15px; padding-top: 15px; border-top: 2px dashed #ffb89a;"><i class="fas fa-laptop-code"></i> <strong>Professional Web Designer & Developer</strong></p>
-    
-    <p>Currently studying CSE, specializing in web design and development. I create modern, responsive websites for businesses and individuals.</p>
-    
-    <p><i class="fas fa-briefcase"></i> <strong>Business Inquiries:</strong><br>
-    📧 <a href="mailto:rakibsami17@gmail.com" style="color: #ff6b6b; text-decoration: none; font-weight: bold;">rakibsami17@gmail.com</a></p>
-    
-    <p style="font-size: 0.9rem; background: #ffe8e0; padding: 8px; border-radius: 30px; margin-top: 10px;">
-      <i class="fas fa-heart" style="color: #ff6b6b;"></i> Let's build something awesome together!
-    </p>
+        <dotlottie-wc id="lottiePlayer" src="https://lottie.host/61387eea-2199-4358-8517-30d129d8eae9/8ECDsKROTA.lottie" autoplay loop></dotlottie-wc>
+      </div>
+      
+
+      <div class="animation-selector">
+        <button class="selector-btn active" onclick="changeLottie('default')" id="btnDefault">
+          <i class="fas fa-code"></i> Coder
+        </button>
+        <button class="selector-btn" onclick="changeLottie('gaming')" id="btnGaming">
+          <i class="fas fa-gamepad"></i> Gaming
+        </button>
+        <button class="selector-btn" onclick="changeLottie('developer')" id="btnDev">
+          <i class="fas fa-laptop-code"></i> Developer
+        </button>
+      </div>
+      
+      <p style="font-size: 1.2rem; font-weight: bold; color: #ff8a7a;">🎮 MINECRAFT CREATIVE BUILDER 🎮</p>
+      
+      <p>I'm a passionate gamer and awesome Minecraft creative builder. I run my own YouTube channel <strong>"Ultimate Gamers 9"</strong> where I share gaming content and creative builds.</p>
+      
+      <p style="margin-top: 15px; padding-top: 15px; border-top: 2px dashed #ffb89a;"><i class="fas fa-laptop-code"></i> <strong>Professional Web Designer & Developer</strong></p>
+      
+      <p>Currently studying CSE, specializing in web design and development. I create modern, responsive websites for businesses and individuals.</p>
+      
+      <div class="about-highlight">
+        <i class="fas fa-heart" style="color: #ff6b6b;"></i> 
+        Let's build something awesome together!
+        <i class="fas fa-heart" style="color: #ff6b6b;"></i>
+      </div>
+    </div>
   </div>
-</div>
 
 
   <div class="modal" id="tiktokModal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('tiktok')">&times;</span>
       <h3><i class="fab fa-tiktok"></i> TikTok Vibes</h3>
-      <img class="modal-gif" src="cat-say-bleh.gif" alt="cat say bleh">
+      <img src="cat-say-bleh.gif" alt="funny cat" style="max-width: 150px; border-radius: 30px; margin: 15px auto;">
       <p>TikTok? Ahhh… cringe 😒 🔥<br>I'm a good boy. My advice? Delete your TikTok. XD</p>
     </div>
   </div>
 
   <script>
+ 
+    const lottieUrls = {
+      default: 'https://lottie.host/61387eea-2199-4358-8517-30d129d8eae9/8ECDsKROTA.lottie',
+      gaming: 'https://lottie.host/22129f39-4611-4b75-ab50-1560a767f2e0/5zz5Sc2LM0.lottie',
+      developer: 'https://lottie.host/765aff40-5313-4c6e-a4cf-56fadafb36d5/RgZo03vc9a.lottie'
+    };
 
+   
+    function changeLottie(type) {
+      const lottiePlayer = document.getElementById('lottiePlayer');
+      
+
+      lottiePlayer.setAttribute('src', lottieUrls[type]);
+      
+
+      lottiePlayer.load();
+      
+
+      document.querySelectorAll('.selector-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      let buttonId = 'btnDefault';
+      if (type === 'gaming') buttonId = 'btnGaming';
+      if (type === 'developer') buttonId = 'btnDev';
+      
+      document.getElementById(buttonId).classList.add('active');
+      
+      console.log(`Lottie changed to: ${type}`);
+    }
+
+   
     function createParticles() {
       for (let i = 0; i < 40; i++) {
         const particle = document.createElement('div');
@@ -465,7 +611,7 @@
     }
     createParticles();
 
-   
+
     function playHoverSound() {
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -483,23 +629,22 @@
         
         oscillator.start();
         oscillator.stop(audioCtx.currentTime + 0.08); 
-        
 
         if (audioCtx.state === 'suspended') {
           audioCtx.resume();
         }
       } catch(e) {
-        console.log('Audio error (silent):', e);
+        console.log('Audio error:', e);
       }
     }
 
- 
+   
     const buttons = document.querySelectorAll('.btn');
     buttons.forEach(btn => {
       btn.addEventListener('mouseenter', playHoverSound);
     });
 
-  
+
     function toggleTheme() {
       const body = document.body;
       const icon = document.querySelector('.theme-toggle i');
@@ -526,6 +671,7 @@
       }
     }
 
+
     function closeModal(type) {
       if (type === 'about') {
         document.getElementById('aboutModal').style.display = 'none';
@@ -549,7 +695,7 @@
       banner.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
     });
 
-    console.log('✅ Final version: BG animation + sound working');
+    console.log('✅ Your Lottie animations are ready!');
   </script>
 </body>
 </html>
